@@ -21,6 +21,8 @@ Url : https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/submissions  
 
 ### 開啟Colab並使用GPU
 
+![OpebGPU](https://github.com/4JasonChou/BertTranning-Kaggle-MovieReview/blob/master/ReadmeData/UseGPU.PNG "This is a sample image.")
+
 ### 安裝與引用
 
 安裝Pytorch & 確認版本
