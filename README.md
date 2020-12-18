@@ -17,3 +17,6 @@ Url : https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/submissions  
 - 學會使用 Colab [學習網址↗](https://medium.com/@ericsk/%E9%80%8F%E9%81%8E-google-colaboratory-%E5%AD%B8%E7%BF%92%E4%BD%BF%E7%94%A8-python-%E5%81%9A%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E7%AD%89%E7%A7%91%E5%AD%B8%E8%A8%88%E7%AE%97-9f92c7bb1f50)
 - 懂Python 
 
+## Method 
+
+### 開啟Colab並使用GPU
