@@ -74,6 +74,9 @@ trainPd=trainPd.reset_index(drop=True)
 mTrainingSet = trainPd.iloc[:109242]
 mTestingSet = trainPd.iloc[109243:]
 ```
+![table](https://github.com/4JasonChou/BertTranning-Kaggle-MovieReview/blob/master/ReadmeData/table01.PNG "This is a sample image.")
+
+
 
 #### 在把資料處理成Bert能接受的格式
 - input_ids : [CLS]句子轉換成Tokens[SEP]
@@ -188,3 +191,4 @@ for epoch in range(2):
 model_to_save = model.module if hasattr(model, 'module') else model  # Take care of distributed/parallel training
 model_to_save.save_pretrained('trained_model')
 ```
+![resoftrain](https://github.com/4JasonChou/BertTranning-Kaggle-MovieReview/blob/master/ReadmeData/trainRes.PNG "This is a sample image.")
