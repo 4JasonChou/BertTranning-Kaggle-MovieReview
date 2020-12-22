@@ -247,8 +247,9 @@ dataframeWriter = pd.DataFrame({'PhraseId':finalQuestionsId,'Ans':finalAnswers})
 dataframeWriter.to_csv("submitV1.csv",index=False,sep=',')
 ```
 
-####提交Kaggle結果
+#### 提交Kaggle結果
 
+![submit](https://github.com/4JasonChou/BertTranning-Kaggle-MovieReview/blob/master/ReadmeData/KaggleRes.PNG "This is a sample image.")
 
 #### 檔案說明 : 
  - BertMovieReview : 訓練任務 Code
