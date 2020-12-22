@@ -192,3 +192,68 @@ model_to_save = model.module if hasattr(model, 'module') else model  # Take care
 model_to_save.save_pretrained('trained_model')
 ```
 ![resoftrain](https://github.com/4JasonChou/BertTranning-Kaggle-MovieReview/blob/master/ReadmeData/trainRes.PNG "This is a sample image.")
+
+#### 預測任務
+
+#### Handler Test.tsv
+```
+testPd = pd.read_csv('test.tsv', sep='\t', header=0)
+testPd.head(5)
+```
+
+PhraseId | SentenceId | Phrase
+-------- | ---------- | ------
+1056061  | 8545       | An intermittently pleasing but mostly routine ...
+1056062  | 8545       | An intermittently pleasing but mostly 
+1056063  | 8545       | An intermittently pleasing but 
+
+#### 轉換成 Bert input embeding
+同訓練任務 , 取得一個Phrase
+- input_ids
+- input_segment_ids
+- input_masks
+
+#### 批次預測
+```
+submitData_dataset = makeDatasetForPredict(submitData_features)
+submitData_dataloader = DataLoader(submitData_dataset ,batch_size=16 ,shuffle=False)
+
+submitQuestionNumber = 0;
+
+for batch_dict in submitData_dataloader:
+  batch_dict = tuple(t.to(device) for t in batch_dict)
+  outputs = model(
+      batch_dict[0],
+      token_type_ids = batch_dict[1],
+      attention_mask = batch_dict[2]
+      )
+    
+  logits = outputs[0]
+  for predicts in logits :
+    max_val = torch.max(predicts)
+    label = (predicts == max_val).nonzero()[0][0]
+    ans_label = answer_dic.to_text(label)
+    #print(ans_label) #預測答案
+    finalQuestionsId.append(questionsId[submitQuestionNumber])
+    finalAnswers.append(ans_label)
+    submitQuestionNumber = submitQuestionNumber+1 ;
+
+    if( submitQuestionNumber%1000 == 0 ) :
+      print("已預測" + str(submitQuestionNumber-1) +  "題,Ans:" + str(ans_label) )   
+
+# Write CSV test
+dataframeWriter = pd.DataFrame({'PhraseId':finalQuestionsId,'Ans':finalAnswers})
+#將DataFrame儲存為csv,index表示是否顯示行名，default=True
+dataframeWriter.to_csv("submitV1.csv",index=False,sep=',')
+```
+
+####提交Kaggle結果
+
+
+#### 檔案說明 : 
+ - BertMovieReview : 訓練任務 Code
+ - Predcit : 預測任務 Code
+ - train.tsv : Kaggle提供的訓練資料
+ - test.tsv : Kaggle提供的測驗提交資料
+ 
+
